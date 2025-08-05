@@ -45,11 +45,10 @@ export default function Portfolio() {
 
   const skills = {
     languages: ["Java", "SQL", "JavaScript"],
-    webDev: ["HTML", "CSS", "Bootstrap", "TailwindCSS", "React.js", "Node.js", "Express.js"],
-    database: ["PostgreSQL", "MongoDB", "Oracle"],
-    tools: ["Git", "GitHub", "VS Code", "Figma","postman", "Docker", "Maven"],
-    skills: ["OOPs", "Data Structures", "Algorithms", "REST APIs", "Agile Methodology"],
-    softSkills: ["Communication", "Problem Solving", "Teamwork", "Adaptability"],
+    frameworksAndLibraries: ["Spring Boot", "Spring MVC", "Spring Security", "Hibernate", "JDBC", "JSP", "JPA", "Thymeleaf", "JUnit", "Mockito"],
+    webDev: ["HTML", "CSS", "Bootstrap", "TailwindCSS", "REST APIs"],
+    tools: ["Git", "GitHub", "VS Code", "Postman", "Docker(Basic)", "Maven", "IntelliJ IDEA", "MySQL"],
+    Concepts: ["OOPs", "Data Structures", "MVC Architecture", "Authentication (JWT/OAuth)", "Unit Testing"],
   }
 
   const projects = [
@@ -134,6 +133,12 @@ export default function Portfolio() {
                 <Button
                   size="lg"
                   className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3"
+                  onClick={() => {
+                  const link = document.createElement("a")
+                  link.href = "/rudra_prasad_satapathy_resumesd.pdf"
+                  link.download = "rudra_prasad_satapathy_resumesd.pdf"
+                  link.click()
+                }}
                 >
                   <Download className="w-5 h-5 mr-2" />
                   Download Resume
@@ -169,15 +174,23 @@ export default function Portfolio() {
             <Card className="shadow-lg">
               <CardContent className="p-8">
                 <p className="text-lg leading-relaxed text-gray-600 dark:text-gray-300">
-                  I'm Rudra Prasad Satapathy, a dedicated B.Tech Computer Science and Engineering student at GIET
-                  University, Gunupur. I am passionate about building impactful software solutions, exploring emerging
-                  technologies, and solving real-world problems through code. I constantly strive to grow both
-                  technically and professionally through hands-on projects, collaborations, and continuous learning.
+                🚀 Final-year B.Tech student passionate about backend development, cloud technologies, and building scalable applications using Java and Spring Boot. I’ve developed hands-on experience through academic projects and self-driven learning, working with modern tools and frameworks to build real-world solutions.
+                <br /><br />
+                I enjoy solving problems and exploring Spring-based ecosystems. I’ve implemented CRUD-based apps using Spring Boot, Hibernate, and JSP, and I’m comfortable with Git-based collaboration.
+                <br /><br />
+                Currently looking for backend development roles (Java/Spring Boot) where I can grow, contribute, and learn in a collaborative environment — open to internships or full-time opportunities.
                 </p>
                 <br />
                 <p className="text-lg leading-relaxed text-gray-600 dark:text-gray-300">
-                  When I'm not coding, I enjoy reading about AI, contributing to open-source projects, and building side
-                  projects that challenge my creativity.
+                  🧰 Tech Stack: <br />
+                  Languages: Java, SQL, JavaScript <br />
+                  Frameworks & Libraries: Spring Boot, Spring MVC, Spring Security, Hibernate, JDBC, JSP, JPA, Thymeleaf,   Junit, Mockito <br />
+                  Web Technologies: HTML, CSS, Tailwind CSS, REST APIs <br />
+                  Tools: Git, GitHub, Postman, MySQL, Docker (basic), Maven, IntelliJ IDEA, VS Code <br />
+                  Concepts: OOPs, Data Structures, MVC Architecture, Authentication (JWT/OAuth), Unit Testing <br />
+
+                  📍 Location: India (GMT+5:30) <br />
+                  🤝 Let’s connect!
                 </p>
               </CardContent>
             </Card>
@@ -214,13 +227,13 @@ export default function Portfolio() {
               <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <CardHeader>
                   <CardTitle className="flex items-center">
-                    <Globe className="w-6 h-6 mr-2 text-green-600" />
-                    Web Development
+                    <Database className="w-6 h-6 mr-2 text-purple-600" />
+                    Frameworks & Libraries
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="flex flex-wrap gap-2">
-                    {skills.webDev.map((skill) => (
+                    {skills.frameworksAndLibraries.map((skill) => (
                       <Badge key={skill} variant="secondary">
                         {skill}
                       </Badge>
@@ -232,13 +245,13 @@ export default function Portfolio() {
               <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <CardHeader>
                   <CardTitle className="flex items-center">
-                    <Database className="w-6 h-6 mr-2 text-purple-600" />
-                    Database
+                    <Globe className="w-6 h-6 mr-2 text-green-600" />
+                    Web Development
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="flex flex-wrap gap-2">
-                    {skills.database.map((skill) => (
+                    {skills.webDev.map((skill) => (
                       <Badge key={skill} variant="secondary">
                         {skill}
                       </Badge>
@@ -269,12 +282,12 @@ export default function Portfolio() {
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <User className="w-6 h-6 mr-2 text-red-600" />
-                    Soft Skills
+                    Concepts
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="flex flex-wrap gap-2">
-                    {skills.softSkills.map((skill) => (
+                    {skills.Concepts.map((skill) => (
                       <Badge key={skill} variant="secondary">
                         {skill}
                       </Badge>
