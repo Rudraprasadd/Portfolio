@@ -164,8 +164,8 @@ const form = useRef<HTMLFormElement>(null);
                   className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3"
                   onClick={() => {
                   const link = document.createElement("a")
-                  link.href = "/rudra_prasad_satapathy_resumesd.pdf"
-                  link.download = "rudra_prasad_satapathy_resumesd.pdf"
+                  link.href = "/Rudra_Prasad_Satapathy_ResumeSD.pdf"
+                  link.download = "Rudra_Prasad_Satapathy_ResumeSD.pdf"
                   link.click()
                 }}
                 >
@@ -404,8 +404,8 @@ const form = useRef<HTMLFormElement>(null);
                 className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3"
                 onClick={() => {
                   const link = document.createElement("a")
-                  link.href = "/rudra_prasad_satapathy_resumesd.pdf"
-                  link.download = "rudra_prasad_satapathy_resumesd.pdf"
+                  link.href = "/Rudra_Prasad_Satapathy_ResumeSD.pdf"
+                  link.download = "Rudra_Prasad_Satapathy_ResumeSD.pdf"
                   link.click()
                 }}
               >
