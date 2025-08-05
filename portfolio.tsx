@@ -6,6 +6,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Badge } from "@/components/ui/badge"
+import emailjs from 'emailjs-com';
+import { useRef } from 'react';
 import {
   Moon,
   Sun,
@@ -53,25 +55,28 @@ export default function Portfolio() {
 
   const projects = [
     {
-      title: "Smart Teacher Availability System",
+      title: "Smart Contact Manager",
       description:
-        "Android app to track and display real-time teacher availability for students in a university. Features include login dashboards and status tracking.",
-      tech: ["Android", "Java", "Firebase"],
+        "Built a secure and scalable web app to manage personal contacts with fields like name, email, number, LinkedIn, GitHub, and address. Integrated Google/GitHub OAuth2 login, full contact CRUD operations, and cloud storage using Cloudinary and role-based access control.",
+      tech: ["Java", "Spring Boot", "Spring Security (JWT/OAuth2)", "Spring Data JPA", "MySQL", "Thymeleaf", "Tailwind CSS", "Cloudinary", "Git", "GitHub", "Postman"],
       icon: <User className="w-6 h-6" />,
+      link: "https://github.com/Rudraprasadd/smart-contact-manager-springboot"
     },
     {
-      title: "AI Hackathon Assistant",
+      title: "URL Shortener",
       description:
-        "AI-powered web platform that helps students form teams, validate ideas, and match with mentors in hackathons. Built with Node.js, PostgreSQL, and React.",
-      tech: ["Node.js", "PostgreSQL", "React", "AI"],
+        "Built a full-stack web application to shorten long URLs with custom keys, expiration time.Implemented user authentication and role-based access (admin/user) using Spring Security.Admins can manage all URLs, while users can only manage their own URLs.Used MySQL for data storage and Thymeleaf for the frontend.",
+      tech: [ "Java", "Spring Boot", "Spring Security", "JPA", "Bootstrap CSS", "Thymeleaf", "MySQL", "Maven","Bootstrap", "Git", "GitHub", "Postman"],
       icon: <Code className="w-6 h-6" />,
+      link: "https://github.com/Rudraprasadd/url_shortener_SpringBoot"
     },
     {
-      title: "Real-Time Chat Application",
+      title: "TO-DO List App",
       description:
-        "A secure chat app using Socket.IO with typing indicators, emoji support, and dark/light mode. No database, uses localStorage for fast, offline experience.",
-      tech: ["Socket.IO", "JavaScript", "HTML/CSS"],
+        "Built this project to keep track of tasks that need to be done. This application will act like a task keeper where the user would be able to enter the tasks that they need to do. Once they are done with their tasks, they can also remove them from the list. They can also edit the entered tasks. Additionally, users can mark tasks as completed, and the application will automatically categorize them for better organization and easy tracking.",
+      tech: ["Spring Boot", "JSP", "JPA", "Java", "Git", "GitHub", "Postman"],
       icon: <MessageSquare className="w-6 h-6" />,
+      link: "https://github.com/Rudraprasadd/Todo-List-using-Spring-Boot",
     },
   ]
 
@@ -328,10 +333,18 @@ export default function Portfolio() {
                         </Badge>
                       ))}
                     </div>
-                    <Button variant="outline" size="sm" className="w-full bg-transparent">
-                      <ExternalLink className="w-4 h-4 mr-2" />
-                      View Project
-                    </Button>
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block w-full"
+                    >
+                      <Button variant="outline" size="sm" className="w-full bg-transparent">
+                        <ExternalLink className="w-4 h-4 mr-2" />
+                        View Project
+                      </Button>
+                    </a>
+
                   </CardContent>
                 </Card>
               ))}
@@ -398,18 +411,20 @@ export default function Portfolio() {
                 <div className="space-y-4">
                   <div className="flex items-center">
                     <Mail className="w-6 h-6 mr-4 text-blue-600" />
-                    <span>rudraprasad@example.com</span>
+                    <a href="mailto:rudraprasadsatapathy@gmail.com" className="hover:text-blue-600 transition-colors">
+                      <span>rudraprasadsatapathy3506@gmail.com</span>
+                    </a>
                   </div>
                   <div className="flex items-center">
                     <Github className="w-6 h-6 mr-4 text-gray-800 dark:text-gray-200" />
-                    <a href="https://github.com/rudra-satapathy" className="hover:text-blue-600 transition-colors">
-                      github.com/rudra-satapathy
+                    <a href="https://github.com/Rudraprasadd" className="hover:text-blue-600 transition-colors">
+                      github.com/Rudraprasadd
                     </a>
                   </div>
                   <div className="flex items-center">
                     <Linkedin className="w-6 h-6 mr-4 text-blue-600" />
-                    <a href="https://linkedin.com/in/rudra-satapathy" className="hover:text-blue-600 transition-colors">
-                      linkedin.com/in/rudra-satapathy
+                    <a href="https://www.linkedin.com/in/rudraprasad-satapathy" className="hover:text-blue-600 transition-colors">
+                      linkedin.com/in/rudraprasad-satapathy
                     </a>
                   </div>
                 </div>
