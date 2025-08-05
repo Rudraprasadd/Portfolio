@@ -53,6 +53,30 @@ export default function Portfolio() {
     Concepts: ["OOPs", "Data Structures", "MVC Architecture", "Authentication (JWT/OAuth)", "Unit Testing"],
   }
 
+const form = useRef<HTMLFormElement>(null);
+
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+      if (!form.current) return; //
+  emailjs.sendForm(
+    'service_c7qvjl9',   // Replace with actual SERVICE ID
+    'template_x01thqe',  // Replace with actual TEMPLATE ID
+    form.current,
+    'p5BJB_Yom4DtZc5cE'    // Replace with actual PUBLIC KEY
+  ).then(
+    (result) => {
+      alert("Message sent!");
+    },
+    (error) => {
+      alert("Failed to send message.");
+    }
+  );
+
+  e.target.reset(); // Clear the form
+};
+
+
   const projects = [
     {
       title: "Smart Contact Manager",
@@ -432,32 +456,27 @@ export default function Portfolio() {
 
               <Card className="shadow-lg">
                 <CardContent className="p-6">
-                  <form className="space-y-4">
+                  <form ref={form} onSubmit={sendEmail} className="space-y-4">
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium mb-2">
-                        Name
-                      </label>
-                      <Input id="name" placeholder="Your Name" />
+                      <label htmlFor="name" className="block text-sm font-medium mb-2">Name</label>
+                      <Input id="name" name="user_name" placeholder="Your Name"  required/>
                     </div>
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium mb-2">
-                        Email
-                      </label>
-                      <Input id="email" type="email" placeholder="your.email@example.com" />
+                      <label htmlFor="email" className="block text-sm font-medium mb-2">Email</label>
+                      <Input id="email" name="user_email" type="email" placeholder="your.email@example.com"  required/>
                     </div>
                     <div>
-                      <label htmlFor="message" className="block text-sm font-medium mb-2">
-                        Message
-                      </label>
-                      <Textarea id="message" placeholder="Your message..." rows={5} />
+                      <label htmlFor="message" className="block text-sm font-medium mb-2">Message</label>
+                      <Textarea id="message" name="message" placeholder="Your message..." rows={5}  required/>
                     </div>
-                    <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white">
+                    <Button type="submit" className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white">
                       <Send className="w-4 h-4 mr-2" />
                       Send Message
                     </Button>
                   </form>
                 </CardContent>
               </Card>
+
             </div>
           </div>
         </section>
