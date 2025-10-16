@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Badge } from "@/components/ui/badge"
 import emailjs from 'emailjs-com';
-import { useRef } from 'react';
+import { useRef, FormEvent } from 'react';
 import {
   Moon,
   Sun,
@@ -56,7 +56,7 @@ export default function Portfolio() {
 const form = useRef<HTMLFormElement>(null);
 
 
-  const sendEmail = (e) => {
+  const sendEmail = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
       if (!form.current) return; //
   emailjs.sendForm(
@@ -73,7 +73,7 @@ const form = useRef<HTMLFormElement>(null);
     }
   );
 
-  e.target.reset(); // Clear the form
+  e.currentTarget.reset(); // Clear the form
 };
 
 
@@ -95,13 +95,14 @@ const form = useRef<HTMLFormElement>(null);
       link: "https://github.com/Rudraprasadd/url_shortener_SpringBoot"
     },
     {
-      title: "TO-DO List App",
-      description:
-        "Built this project to keep track of tasks that need to be done. This application will act like a task keeper where the user would be able to enter the tasks that they need to do. Once they are done with their tasks, they can also remove them from the list. They can also edit the entered tasks. Additionally, users can mark tasks as completed, and the application will automatically categorize them for better organization and easy tracking.",
-      tech: ["Spring Boot", "JSP", "JPA", "Java", "Git", "GitHub", "Postman"],
-      icon: <MessageSquare className="w-6 h-6" />,
-      link: "https://github.com/Rudraprasadd/Todo-List-using-Spring-Boot",
-    },
+    title: "QUIZ APPLICATION - (Open Source Project) - Presently Contributing",
+    description:
+      "Developed a secure, full-stack quiz platform featuring AI-generated questions, real-time scoring, and role-based access control using Keycloak. Built and containerized the backend with Spring Boot (Gradle) and PostgreSQL (Docker), with comprehensive API documentation via Swagger. Integrated an interactive React + Vite frontend to deliver a seamless and scalable user experience.",
+    tech: ["Spring Boot", "React", "Vite", "PostgreSQL", "Docker", "Keycloak", "Swagger", "Git", "GitHub"],
+    icon: <MessageSquare className="w-6 h-6" />,
+    link: "https://github.com/Rudraprasadd/QuizGame",
+  },
+
   ]
 
   return (
