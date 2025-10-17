@@ -23,7 +23,10 @@ import {
   User,
   MessageSquare,
   Send,
+  ArrowRight,
+
 } from "lucide-react"
+import { Text } from "@mantine/core"
 
 export default function Portfolio() {
   const [darkMode, setDarkMode] = useState(false)
@@ -53,28 +56,28 @@ export default function Portfolio() {
     Concepts: ["OOPs", "Data Structures", "MVC Architecture", "Authentication (JWT/OAuth)", "Unit Testing"],
   }
 
-const form = useRef<HTMLFormElement>(null);
+  const form = useRef<HTMLFormElement>(null);
 
 
   const sendEmail = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-      if (!form.current) return; //
-  emailjs.sendForm(
-    'service_c7qvjl9',   // Replace with actual SERVICE ID
-    'template_x01thqe',  // Replace with actual TEMPLATE ID
-    form.current,
-    'p5BJB_Yom4DtZc5cE'    // Replace with actual PUBLIC KEY
-  ).then(
-    (result) => {
-      alert("Message sent!");
-    },
-    (error) => {
-      alert("Failed to send message.");
-    }
-  );
+    if (!form.current) return; //
+    emailjs.sendForm(
+      'service_c7qvjl9',   // Replace with actual SERVICE ID
+      'template_x01thqe',  // Replace with actual TEMPLATE ID
+      form.current,
+      'p5BJB_Yom4DtZc5cE'    // Replace with actual PUBLIC KEY
+    ).then(
+      (result) => {
+        alert("Message sent!");
+      },
+      (error) => {
+        alert("Failed to send message.");
+      }
+    );
 
-  e.currentTarget.reset(); // Clear the form
-};
+    e.currentTarget.reset(); // Clear the form
+  };
 
 
   const projects = [
@@ -90,20 +93,21 @@ const form = useRef<HTMLFormElement>(null);
       title: "URL Shortener",
       description:
         "Built a full-stack web application to shorten long URLs with custom keys, expiration time.Implemented user authentication and role-based access (admin/user) using Spring Security.Admins can manage all URLs, while users can only manage their own URLs.Used MySQL for data storage and Thymeleaf for the frontend.",
-      tech: [ "Java", "Spring Boot", "Spring Security", "JPA", "Bootstrap CSS", "Thymeleaf", "MySQL", "Maven","Bootstrap", "Git", "GitHub", "Postman"],
+      tech: ["Java", "Spring Boot", "Spring Security", "JPA", "Bootstrap CSS", "Thymeleaf", "MySQL", "Maven", "Bootstrap", "Git", "GitHub", "Postman"],
       icon: <Code className="w-6 h-6" />,
       link: "https://github.com/Rudraprasadd/url_shortener_SpringBoot"
     },
     {
-    title: "QUIZ APPLICATION - (Open Source Project) - Presently Contributing",
-    description:
-      "Developed a secure, full-stack quiz platform featuring AI-generated questions, real-time scoring, and role-based access control using Keycloak. Built and containerized the backend with Spring Boot (Gradle) and PostgreSQL (Docker), with comprehensive API documentation via Swagger. Integrated an interactive React + Vite frontend to deliver a seamless and scalable user experience.",
-    tech: ["Spring Boot", "React", "Vite", "PostgreSQL", "Docker", "Keycloak", "Swagger", "Git", "GitHub"],
-    icon: <MessageSquare className="w-6 h-6" />,
-    link: "https://github.com/Rudraprasadd/QuizGame",
-  },
+      title: "QUIZ APPLICATION - (Open Source Project) - Presently Contributing",
+      description:
+        "Developed a secure, full-stack quiz platform featuring AI-generated questions, real-time scoring, and role-based access control using Keycloak. Built and containerized the backend with Spring Boot (Gradle) and PostgreSQL (Docker), with comprehensive API documentation via Swagger. Integrated an interactive React + Vite frontend to deliver a seamless and scalable user experience.",
+      tech: ["Spring Boot", "React", "Vite", "PostgreSQL", "Docker", "Keycloak", "Swagger", "Git", "GitHub"],
+      icon: <MessageSquare className="w-6 h-6" />,
+      link: "https://github.com/Rudraprasadd/QuizGame",
+    },
 
   ]
+  const [expanded, setExpanded] = useState([false,false,false]);
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${darkMode ? "dark" : ""}`}>
@@ -122,9 +126,8 @@ const form = useRef<HTMLFormElement>(null);
                   <button
                     key={section}
                     onClick={() => scrollToSection(section)}
-                    className={`capitalize transition-colors duration-200 hover:text-blue-600 dark:hover:text-blue-400 ${
-                      activeSection === section ? "text-blue-600 dark:text-blue-400" : ""
-                    }`}
+                    className={`capitalize transition-colors duration-200 hover:text-blue-600 dark:hover:text-blue-400 ${activeSection === section ? "text-blue-600 dark:text-blue-400" : ""
+                      }`}
                   >
                     {section}
                   </button>
@@ -164,16 +167,16 @@ const form = useRef<HTMLFormElement>(null);
                   size="lg"
                   className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3"
                   onClick={() => {
-                  const link = document.createElement("a")
-                  link.href = "/Rudraprasad_satapathy_resume.pdf"
-                  link.download = "Rudraprasad_satapathy_resume.pdf"
-                  link.click()
-                }}
+                    const link = document.createElement("a")
+                    link.href = "/Rudraprasad_satapathy_resume.pdf"
+                    link.download = "Rudraprasad_satapathy_resume.pdf"
+                    link.click()
+                  }}
                 >
                   <Download className="w-5 h-5 mr-2" />
                   Download Resume
                 </Button>
-                
+
               </div>
 
               <div className="flex justify-center">
@@ -204,11 +207,11 @@ const form = useRef<HTMLFormElement>(null);
             <Card className="shadow-lg">
               <CardContent className="p-8">
                 <p className="text-lg leading-relaxed text-gray-600 dark:text-gray-300">
-                🚀 Final-year B.Tech student passionate about backend development, cloud technologies, and building scalable applications using Java and Spring Boot. I’ve developed hands-on experience through academic projects and self-driven learning, working with modern tools and frameworks to build real-world solutions.
-                <br /><br />
-                I enjoy solving problems and exploring Spring-based ecosystems. I’ve implemented CRUD-based apps using Spring Boot, Hibernate, and JSP, and I’m comfortable with Git-based collaboration.
-                <br /><br />
-                Currently looking for backend development roles (Java/Spring Boot) where I can grow, contribute, and learn in a collaborative environment — open to internships or full-time opportunities.
+                  🚀 Final-year B.Tech student passionate about backend development, cloud technologies, and building scalable applications using Java and Spring Boot. I’ve developed hands-on experience through academic projects and self-driven learning, working with modern tools and frameworks to build real-world solutions.
+                  <br /><br />
+                  I enjoy solving problems and exploring Spring-based ecosystems. I’ve implemented CRUD-based apps using Spring Boot, Hibernate, and JSP, and I’m comfortable with Git-based collaboration.
+                  <br /><br />
+                  Currently looking for backend development roles (Java/Spring Boot) where I can grow, contribute, and learn in a collaborative environment — open to internships or full-time opportunities.
                 </p>
                 <br />
                 <p className="text-lg leading-relaxed text-gray-600 dark:text-gray-300">
@@ -343,14 +346,44 @@ const form = useRef<HTMLFormElement>(null);
                   key={index}
                   className="shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
                 >
-                  <CardHeader>
-                    <div className="flex items-center mb-2">
-                      <div className="p-2 bg-blue-100 dark:bg-blue-900 rounded-lg mr-3">{project.icon}</div>
-                      <CardTitle className="text-xl">{project.title}</CardTitle>
+                  <CardHeader className="releative">
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center space-x-3">
+                        <div className="p-3 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500 text-white shadow-md transform transition-transform duration-300 group-hover:scale-110">
+                          {project.icon}
+                        </div>
+                        <CardTitle className="text-2xl font-semibold text-gray-800 dark:text-gray-100 tracking-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
+                          <Text lineClamp={2}>{project.title}</Text>
+
+                        </CardTitle>
+                      </div>
                     </div>
+
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-all duration-300 group"
+                    >
+                      <span>View Project</span>
+                     <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                    </a>
                   </CardHeader>
+
                   <CardContent>
-                    <CardDescription className="text-base mb-4">{project.description}</CardDescription>
+                    <CardDescription className="text-base mb-4">
+                      {/* If your Text component supports lineClamp, great; else use Tailwind */}
+                      <Text className={!expanded[index] ? "line-clamp-5" : ""}>
+                        {project.description}
+                      </Text>
+
+                      <button
+                        onClick={() => setExpanded({...expanded, [index]: !expanded[index]})}
+                        className="hover:underline text-blue-600 cursor-pointer mt-1"
+                      >
+                        {expanded[index] ? "View less" : "View more"}
+                      </button>
+                    </CardDescription>
                     <div className="flex flex-wrap gap-2 mb-4">
                       {project.tech.map((tech) => (
                         <Badge key={tech} variant="outline">
@@ -358,17 +391,8 @@ const form = useRef<HTMLFormElement>(null);
                         </Badge>
                       ))}
                     </div>
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block w-full"
-                    >
-                      <Button variant="outline" size="sm" className="w-full bg-transparent">
-                        <ExternalLink className="w-4 h-4 mr-2" />
-                        View Project
-                      </Button>
-                    </a>
+
+
 
                   </CardContent>
                 </Card>
@@ -412,7 +436,7 @@ const form = useRef<HTMLFormElement>(null);
               >
                 <Download className="w-5 h-5 mr-2" />
                 Download Full Resume PDF
-              </Button> 
+              </Button>
             </div>
           </div>
         </section>
@@ -460,15 +484,15 @@ const form = useRef<HTMLFormElement>(null);
                   <form ref={form} onSubmit={sendEmail} className="space-y-4">
                     <div>
                       <label htmlFor="name" className="block text-sm font-medium mb-2">Name</label>
-                      <Input id="name" name="user_name" placeholder="Your Name"  required/>
+                      <Input id="name" name="user_name" placeholder="Your Name" required />
                     </div>
                     <div>
                       <label htmlFor="email" className="block text-sm font-medium mb-2">Email</label>
-                      <Input id="email" name="user_email" type="email" placeholder="your.email@example.com"  required/>
+                      <Input id="email" name="user_email" type="email" placeholder="your.email@example.com" required />
                     </div>
                     <div>
                       <label htmlFor="message" className="block text-sm font-medium mb-2">Message</label>
-                      <Textarea id="message" name="message" placeholder="Your message..." rows={5}  required/>
+                      <Textarea id="message" name="message" placeholder="Your message..." rows={5} required />
                     </div>
                     <Button type="submit" className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white">
                       <Send className="w-4 h-4 mr-2" />
