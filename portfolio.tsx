@@ -3,11 +3,8 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
 import { Badge } from "@/components/ui/badge"
-import emailjs from 'emailjs-com';
-import { useRef, FormEvent } from 'react';
+import ContactForm from "@/components/ContactForm"
 import {
   Moon,
   Sun,
@@ -19,10 +16,10 @@ import {
   Code,
   Database,
   Globe,
+  MapPin,
   PenToolIcon as Tool,
   User,
   MessageSquare,
-  Send,
   ArrowRight,
 
 } from "lucide-react"
@@ -55,30 +52,6 @@ export default function Portfolio() {
     tools: ["Git", "GitHub", "VS Code", "Postman", "Docker(Basic)", "Maven", "IntelliJ IDEA", "MySQL"],
     Concepts: ["OOPs", "Data Structures", "MVC Architecture", "Authentication (JWT/OAuth)", "Unit Testing"],
   }
-
-  const form = useRef<HTMLFormElement>(null);
-
-
-  const sendEmail = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!form.current) return; //
-    emailjs.sendForm(
-      'service_c7qvjl9',   // Replace with actual SERVICE ID
-      'template_x01thqe',  // Replace with actual TEMPLATE ID
-      form.current,
-      'p5BJB_Yom4DtZc5cE'    // Replace with actual PUBLIC KEY
-    ).then(
-      (result) => {
-        alert("Message sent!");
-      },
-      (error) => {
-        alert("Failed to send message.");
-      }
-    );
-
-    e.currentTarget.reset(); // Clear the form
-  };
-
 
   const projects = [
     {
@@ -442,66 +415,100 @@ export default function Portfolio() {
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="py-20 bg-gray-50 dark:bg-gray-800">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold mb-4">Contact Me</h2>
-              <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto"></div>
+        <section id="contact" className="relative overflow-hidden py-24 bg-white dark:bg-gray-950">
+          <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-blue-50 to-transparent dark:from-blue-950/30" />
+
+          <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="mb-14 max-w-3xl">
+              <span className="inline-flex rounded-full border border-blue-200 bg-blue-50 px-4 py-1 text-sm font-semibold text-blue-700 dark:border-blue-900 dark:bg-blue-950/40 dark:text-blue-300">
+                Contact
+              </span>
+              <h2 className="mt-5 text-4xl font-bold tracking-tight text-gray-950 dark:text-white sm:text-5xl">
+                Let&apos;s build something practical.
+              </h2>
+              <p className="mt-5 text-lg leading-8 text-gray-600 dark:text-gray-300">
+                Share a project idea, collaboration request, or role opportunity. I usually respond with the next clear step.
+              </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-12">
-              <div>
-                <h3 className="text-2xl font-semibold mb-6">Get In Touch</h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-8">
-                  I'm always open to discussing new opportunities, interesting projects, or just having a chat about
-                  technology.
-                </p>
+            {/* Stretched grid keeps both contact columns the same height on desktop and stacks them on mobile. */}
+            <div className="grid grid-cols-1 items-stretch gap-6 md:grid-cols-2">
+              {/* Full-height flex column distributes the contact cards evenly against the form card. */}
+              <div className="flex h-full min-h-[500px] flex-col justify-between gap-4">
+                <a
+                  href="mailto:rudraprasadsatapathy3506@gmail.com"
+                  className="group flex items-start rounded-2xl border border-gray-200 bg-gray-50 p-6 transition hover:-translate-y-1 hover:border-blue-200 hover:bg-white hover:shadow-xl hover:shadow-blue-950/5 dark:border-gray-800 dark:bg-gray-900/60 dark:hover:border-blue-900 dark:hover:bg-gray-900"
+                >
+                  <span className="mr-4 inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-white shadow-lg shadow-blue-600/20">
+                    <Mail className="h-5 w-5" />
+                  </span>
+                  <span>
+                    <span className="block font-semibold text-gray-950 dark:text-white">Email</span>
+                    <span className="mt-1 block break-all text-sm text-gray-600 transition group-hover:text-blue-600 dark:text-gray-300 dark:group-hover:text-blue-300">
+                      rudraprasadsatapathy3506@gmail.com
+                    </span>
+                  </span>
+                </a>
 
-                <div className="space-y-4">
-                  <div className="flex items-center">
-                    <Mail className="w-6 h-6 mr-4 text-blue-600" />
-                    <a href="mailto:rudraprasadsatapathy@gmail.com" className="hover:text-blue-600 transition-colors">
-                      <span>rudraprasadsatapathy3506@gmail.com</span>
-                    </a>
-                  </div>
-                  <div className="flex items-center">
-                    <Github className="w-6 h-6 mr-4 text-gray-800 dark:text-gray-200" />
-                    <a href="https://github.com/Rudraprasadd" className="hover:text-blue-600 transition-colors">
+                <a
+                  href="https://github.com/Rudraprasadd"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group flex items-start rounded-2xl border border-gray-200 bg-gray-50 p-6 transition hover:-translate-y-1 hover:border-blue-200 hover:bg-white hover:shadow-xl hover:shadow-blue-950/5 dark:border-gray-800 dark:bg-gray-900/60 dark:hover:border-blue-900 dark:hover:bg-gray-900"
+                >
+                  <span className="mr-4 inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gray-950 text-white shadow-lg shadow-gray-950/15 dark:bg-white dark:text-gray-950">
+                    <Github className="h-5 w-5" />
+                  </span>
+                  <span>
+                    <span className="block font-semibold text-gray-950 dark:text-white">GitHub</span>
+                    <span className="mt-1 block text-sm text-gray-600 transition group-hover:text-blue-600 dark:text-gray-300 dark:group-hover:text-blue-300">
                       github.com/Rudraprasadd
-                    </a>
-                  </div>
-                  <div className="flex items-center">
-                    <Linkedin className="w-6 h-6 mr-4 text-blue-600" />
-                    <a href="https://www.linkedin.com/in/rudraprasad-satapathy" className="hover:text-blue-600 transition-colors">
+                    </span>
+                  </span>
+                </a>
+
+                <a
+                  href="https://www.linkedin.com/in/rudraprasad-satapathy"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group flex items-start rounded-2xl border border-gray-200 bg-gray-50 p-6 transition hover:-translate-y-1 hover:border-blue-200 hover:bg-white hover:shadow-xl hover:shadow-blue-950/5 dark:border-gray-800 dark:bg-gray-900/60 dark:hover:border-blue-900 dark:hover:bg-gray-900"
+                >
+                  <span className="mr-4 inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-sky-600 text-white shadow-lg shadow-sky-600/20">
+                    <Linkedin className="h-5 w-5" />
+                  </span>
+                  <span>
+                    <span className="block font-semibold text-gray-950 dark:text-white">LinkedIn</span>
+                    <span className="mt-1 block text-sm text-gray-600 transition group-hover:text-blue-600 dark:text-gray-300 dark:group-hover:text-blue-300">
                       linkedin.com/in/rudraprasad-satapathy
-                    </a>
-                  </div>
+                    </span>
+                  </span>
+                </a>
+
+                <div className="flex items-start rounded-2xl border border-gray-200 bg-gray-50 p-6 dark:border-gray-800 dark:bg-gray-900/60">
+                  <span className="mr-4 inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-purple-600 text-white shadow-lg shadow-purple-600/20">
+                    <MapPin className="h-5 w-5" />
+                  </span>
+                  <span>
+                    <span className="block font-semibold text-gray-950 dark:text-white">Location</span>
+                    <span className="mt-1 block text-sm text-gray-600 dark:text-gray-300">
+                      India, available for remote collaboration
+                    </span>
+                  </span>
                 </div>
               </div>
 
-              <Card className="shadow-lg">
-                <CardContent className="p-6">
-                  <form ref={form} onSubmit={sendEmail} className="space-y-4">
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-medium mb-2">Name</label>
-                      <Input id="name" name="user_name" placeholder="Your Name" required />
-                    </div>
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium mb-2">Email</label>
-                      <Input id="email" name="user_email" type="email" placeholder="your.email@example.com" required />
-                    </div>
-                    <div>
-                      <label htmlFor="message" className="block text-sm font-medium mb-2">Message</label>
-                      <Textarea id="message" name="message" placeholder="Your message..." rows={5} required />
-                    </div>
-                    <Button type="submit" className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white">
-                      <Send className="w-4 h-4 mr-2" />
-                      Send Message
-                    </Button>
-                  </form>
+              {/* The form card mirrors the left column height and uses flex so the submit button can sit at the bottom. */}
+              <Card className="flex h-full min-h-[500px] flex-col justify-between overflow-hidden border-gray-200 bg-white py-0 shadow-2xl shadow-blue-950/10 dark:border-gray-800 dark:bg-gray-900">
+                <CardHeader className="space-y-2 border-b border-gray-100 p-6 dark:border-gray-800">
+                  <CardTitle className="text-2xl text-gray-950 dark:text-white">Send a Message</CardTitle>
+                  <CardDescription className="text-base">
+                    Your message goes directly through EmailJS using the portfolio contact template.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="flex flex-1 flex-col p-6">
+                  <ContactForm />
                 </CardContent>
               </Card>
-
             </div>
           </div>
         </section>

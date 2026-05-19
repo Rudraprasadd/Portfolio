@@ -1,0 +1,19 @@
+
+> my-v0-project@0.1.0 dev D:\Portfolio
+> next dev
+
+   ▲ Next.js 15.2.4
+   - Local:        http://localhost:3001
+   - Network:      http://10.37.163.237:3001
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 2.8s
+ ○ Compiling / ...
+ ✓ Compiled / in 10.4s (2640 modules)
+ ✓ Compiled in 1781ms (1093 modules)
+ ✓ Compiled in 1790ms (1093 modules)
+ ✓ Compiled in 1747ms (1093 modules)
+ ✓ Compiled in 2.8s (1093 modules)
+   Reload env: .env.local
+ ✓ Compiled in 685ms (1079 modules)
