@@ -21,13 +21,12 @@ import {
   User,
   MessageSquare,
   ArrowRight,
-
 } from "lucide-react"
 import { Text } from "@mantine/core"
 
 export default function Portfolio() {
   const [darkMode, setDarkMode] = useState(false)
-  const [activeSection, setActiveSection] = useState("home")
+  const [activeSection, setActiveSection] = useState("Home")
 
   useEffect(() => {
     if (darkMode) {
@@ -45,7 +44,7 @@ export default function Portfolio() {
     }
   }
 
-  const skills = {
+  const Skills = {
     languages: ["Java", "SQL", "JavaScript"],
     frameworksAndLibraries: ["Spring Boot", "Spring MVC", "Spring Security", "Hibernate", "JDBC", "JSP", "JPA", "Thymeleaf", "JUnit", "Mockito"],
     webDev: ["HTML", "CSS", "Bootstrap", "TailwindCSS", "REST APIs"],
@@ -53,14 +52,14 @@ export default function Portfolio() {
     Concepts: ["OOPs", "Data Structures", "MVC Architecture", "Authentication (JWT/OAuth)", "Unit Testing"],
   }
 
-  const projects = [
+  const Projects = [
     {
       title: "Smart Contact Manager",
       description:
-        "Built a secure and scalable web app to manage personal contacts with fields like name, email, number, LinkedIn, GitHub, and address. Integrated Google/GitHub OAuth2 login, full contact CRUD operations, and cloud storage using Cloudinary and role-based access control.",
+        "Built a secure and scalable web app to manage personal Contacts with fields like name, email, number, LinkedIn, GitHub, and address. Integrated Google/GitHub OAuth2 login, full Contact CRUD operations, and cloud storage using Cloudinary and role-based access control.",
       tech: ["Java", "Spring Boot", "Spring Security (JWT/OAuth2)", "Spring Data JPA", "MySQL", "Thymeleaf", "Tailwind CSS", "Cloudinary", "Git", "GitHub", "Postman"],
       icon: <User className="w-6 h-6" />,
-      link: "https://github.com/Rudraprasadd/smart-contact-manager-springboot"
+      link: "https://github.com/Rudraprasadd/smart-Contact-manager-springboot"
     },
     {
       title: "URL Shortener",
@@ -95,7 +94,7 @@ export default function Portfolio() {
               </div>
 
               <div className="hidden md:flex space-x-8">
-                {["home", "about", "skills", "projects", "resume", "contact"].map((section) => (
+                {["Home", "About", "Skills", "Projects", "Resume", "Contact"].map((section) => (
                   <button
                     key={section}
                     onClick={() => scrollToSection(section)}
@@ -118,7 +117,7 @@ export default function Portfolio() {
         </nav>
 
         {/* Home Section */}
-        <section id="home" className="pt-20 min-h-screen flex items-center">
+        <section id="Home" className="pt-20 min-h-screen flex items-center">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="space-y-8">
@@ -141,8 +140,8 @@ export default function Portfolio() {
                   className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3"
                   onClick={() => {
                     const link = document.createElement("a")
-                    link.href = "/Rudraprasad_satapathy_resume.pdf"
-                    link.download = "Rudraprasad_satapathy_resume.pdf"
+                    link.href = "/Rudraprasad_satapathy_Resume.pdf"
+                    link.download = "Rudraprasad_satapathy_Resume.pdf"
                     link.click()
                   }}
                 >
@@ -170,7 +169,7 @@ export default function Portfolio() {
         </section>
 
         {/* About Section */}
-        <section id="about" className="py-20 bg-gray-50 dark:bg-gray-800">
+        <section id="About" className="py-20 bg-gray-50 dark:bg-gray-800">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-bold mb-4">About Me</h2>
@@ -204,7 +203,7 @@ export default function Portfolio() {
         </section>
 
         {/* Skills Section */}
-        <section id="skills" className="py-20">
+        <section id="Skills" className="py-20">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-bold mb-4">Skills</h2>
@@ -221,7 +220,7 @@ export default function Portfolio() {
                 </CardHeader>
                 <CardContent>
                   <div className="flex flex-wrap gap-2">
-                    {skills.languages.map((skill) => (
+                    {Skills.languages.map((skill) => (
                       <Badge key={skill} variant="secondary">
                         {skill}
                       </Badge>
@@ -239,7 +238,7 @@ export default function Portfolio() {
                 </CardHeader>
                 <CardContent>
                   <div className="flex flex-wrap gap-2">
-                    {skills.frameworksAndLibraries.map((skill) => (
+                    {Skills.frameworksAndLibraries.map((skill) => (
                       <Badge key={skill} variant="secondary">
                         {skill}
                       </Badge>
@@ -257,7 +256,7 @@ export default function Portfolio() {
                 </CardHeader>
                 <CardContent>
                   <div className="flex flex-wrap gap-2">
-                    {skills.webDev.map((skill) => (
+                    {Skills.webDev.map((skill) => (
                       <Badge key={skill} variant="secondary">
                         {skill}
                       </Badge>
@@ -275,7 +274,7 @@ export default function Portfolio() {
                 </CardHeader>
                 <CardContent>
                   <div className="flex flex-wrap gap-2">
-                    {skills.tools.map((skill) => (
+                    {Skills.tools.map((skill) => (
                       <Badge key={skill} variant="secondary">
                         {skill}
                       </Badge>
@@ -293,7 +292,7 @@ export default function Portfolio() {
                 </CardHeader>
                 <CardContent>
                   <div className="flex flex-wrap gap-2">
-                    {skills.Concepts.map((skill) => (
+                    {Skills.Concepts.map((skill) => (
                       <Badge key={skill} variant="secondary">
                         {skill}
                       </Badge>
@@ -306,7 +305,7 @@ export default function Portfolio() {
         </section>
 
         {/* Projects Section */}
-        <section id="projects" className="py-20 bg-gray-50 dark:bg-gray-800">
+        <section id="Projects" className="py-20 bg-gray-50 dark:bg-gray-800">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-bold mb-4">Projects</h2>
@@ -314,7 +313,7 @@ export default function Portfolio() {
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {projects.map((project, index) => (
+              {Projects.map((project, index) => (
                 <Card
                   key={index}
                   className="shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
@@ -375,7 +374,7 @@ export default function Portfolio() {
         </section>
 
         {/* Resume Section */}
-        <section id="resume" className="py-20">
+        <section id="Resume" className="py-20">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-bold mb-4">Resume</h2>
@@ -387,7 +386,7 @@ export default function Portfolio() {
                 <div className="bg-white dark:bg-gray-900 p-6 rounded-lg">
                   <div className="flex justify-center">
                     <img
-                      src="/resume.png" // Change this path based on your project
+                      src="/Resume.png" // Change this path based on your project
                       alt="Resume of Rudra Prasad Satapathy"
                       className="w-full max-w-4xl rounded-lg shadow"
                     />
@@ -402,8 +401,8 @@ export default function Portfolio() {
                 className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3"
                 onClick={() => {
                   const link = document.createElement("a")
-                  link.href = "/Rudraprasad_satapathy_resume.pdf"
-                  link.download = "Rudraprasad_satapathy_resume.pdf"
+                  link.href = "/Rudraprasad_satapathy_Resume.pdf"
+                  link.download = "Rudraprasad_satapathy_Resume.pdf"
                   link.click()
                 }}
               >
@@ -415,7 +414,7 @@ export default function Portfolio() {
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="relative overflow-hidden py-24 bg-white dark:bg-gray-950">
+        <section id="Contact" className="relative overflow-hidden py-24 bg-white dark:bg-gray-950">
           <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-blue-50 to-transparent dark:from-blue-950/30" />
 
           <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -431,9 +430,9 @@ export default function Portfolio() {
               </p>
             </div>
 
-            {/* Stretched grid keeps both contact columns the same height on desktop and stacks them on mobile. */}
+            {/* Stretched grid keeps both Contact columns the same height on desktop and stacks them on mobile. */}
             <div className="grid grid-cols-1 items-stretch gap-6 md:grid-cols-2">
-              {/* Full-height flex column distributes the contact cards evenly against the form card. */}
+              {/* Full-height flex column distributes the Contact cards evenly against the form card. */}
               <div className="flex h-full min-h-[500px] flex-col justify-between gap-4">
                 <a
                   href="mailto:rudraprasadsatapathy3506@gmail.com"
@@ -502,7 +501,7 @@ export default function Portfolio() {
                 <CardHeader className="space-y-2 border-b border-gray-100 p-6 dark:border-gray-800">
                   <CardTitle className="text-2xl text-gray-950 dark:text-white">Send a Message</CardTitle>
                   <CardDescription className="text-base">
-                    Your message goes directly through EmailJS using the portfolio contact template.
+                    Your message goes directly through EmailJS using the portfolio Contact template.
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="flex flex-1 flex-col p-6">
