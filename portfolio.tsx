@@ -1,5 +1,6 @@
 "use client"
 
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -70,12 +71,12 @@ export default function Portfolio() {
       link: "https://github.com/Rudraprasadd/url_shortener_SpringBoot"
     },
     {
-      title: "QUIZ APPLICATION - (Open Source Project) - Presently Contributing",
+      title: "Patient Management System | Spring Boot Microservices ",
       description:
-        "Developed a secure, full-stack quiz platform featuring AI-generated questions, real-time scoring, and role-based access control using Keycloak. Built and containerized the backend with Spring Boot (Gradle) and PostgreSQL (Docker), with comprehensive API documentation via Swagger. Integrated an interactive React + Vite frontend to deliver a seamless and scalable user experience.",
-      tech: ["Spring Boot", "React", "Vite", "PostgreSQL", "Docker", "Keycloak", "Swagger", "Git", "GitHub"],
+        "Designed a microservices-based patient management system featuring JWT authentication, Apache Kafka for async messaging, and gRPC for inter-service communication. Containerized all services with Docker and deployed via an API Gateway; used MySQL and PostgreSQL for persistent storage.",
+      tech: ["Java", "Spring Boot", "REST APIs","Apache Kafka","gRPC", "PostgreSQL", "Docker", "JWT", "API Gateway", "Git", "GitHub"],
       icon: <MessageSquare className="w-6 h-6" />,
-      link: "https://github.com/Rudraprasadd/QuizGame",
+      link: "https://github.com/Rudraprasadd/PatientManagement_Microservice",
     },
 
   ]
