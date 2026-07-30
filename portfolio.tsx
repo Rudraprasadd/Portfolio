@@ -84,22 +84,22 @@ export default function Portfolio() {
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${darkMode ? "dark" : ""}`}>
-      <div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white ">
+      <div className="portfolio-shell overflow-x-hidden bg-white text-gray-900 dark:bg-gray-950 dark:text-white">
         {/* Navigation */}
-        <nav className="fixed top-0 w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-md z-50 border-b border-gray-200 dark:border-gray-700 ">
+        <nav className="fixed top-0 z-50 w-full border-b border-white/50 bg-white/70 shadow-sm shadow-slate-950/5 backdrop-blur-xl dark:border-white/5 dark:bg-gray-950/70">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
-            <div className="flex justify-between items-center py- mt-1">
-              <div className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <div className="flex items-center justify-between py-3">
+              <div className="brand-gradient text-xl font-extrabold tracking-tight sm:text-2xl">
                 Rudra Prasad Satapathy
-                <p className="text-lg font-semibold text-gray-700 dark:text-gray-300 ">Software Developer</p>
+                <p className="mt-0.5 text-xs font-bold uppercase tracking-[0.16em] text-gray-500 dark:text-gray-400">Software Developer</p>
               </div>
 
-              <div className="hidden md:flex space-x-8">
+              <div className="hidden items-center rounded-full border border-slate-200/70 bg-white/60 px-2 py-1 shadow-sm dark:border-gray-700 dark:bg-gray-900/70 md:flex md:space-x-1">
                 {["Home", "About", "Skills", "Projects", "Resume", "Contact"].map((section) => (
                   <button
                     key={section}
                     onClick={() => scrollToSection(section)}
-                    className={`capitalize transition-colors duration-200 hover:text-blue-600 dark:hover:text-blue-400 ${activeSection === section ? "text-blue-600 dark:text-blue-400" : ""
+                    className={`rounded-full px-3 py-1.5 text-sm font-medium capitalize transition-all duration-200 hover:bg-blue-50 hover:text-blue-600 dark:hover:bg-blue-950/40 dark:hover:text-blue-300 ${activeSection === section ? "bg-blue-50 text-blue-700 dark:bg-blue-950/50 dark:text-blue-300" : "text-gray-600 dark:text-gray-300"
                       }`}
                   >
                     {section}
@@ -109,7 +109,8 @@ export default function Portfolio() {
 
               <button
                 onClick={() => setDarkMode(!darkMode)}
-                className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
+                aria-label="Toggle color theme"
+                className="rounded-full border border-slate-200 bg-white p-2.5 text-slate-700 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-200"
               >
                 {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
               </button>
@@ -118,27 +119,27 @@ export default function Portfolio() {
         </nav>
 
         {/* Home Section */}
-        <section id="Home" className="pt-20 min-h-screen flex items-center">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <section id="Home" className="flex min-h-screen items-center pt-20">
+          <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+            <div className="grid items-center gap-14 lg:grid-cols-2">
               <div className="space-y-8">
                 <div className="space-y-4">
-                  <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
+                  <h1 className="text-5xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
                     Hi, I'm{" "}
-                    <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                    <span className="brand-gradient">
                       Rudra Prasad Satapathy
-                      <p className="text-lg font-semibold text-gray-700 dark:text-gray-300 mt-4">Software Developer</p>
                     </span>
                   </h1>
-                  <p className="text-xl lg:text-2xl text-gray-600 dark:text-gray-300">
+                  <p className="brand-gradient text-lg font-semibold">Software Developer</p>
+                  <p className="text-xl font-medium text-gray-700 dark:text-gray-200 lg:text-2xl">
                     A passionate Computer Science student
                   </p>
-                  <p className="text-lg text-gray-500 dark:text-gray-400">Building future-ready digital solutions</p>
+                  <p className="max-w-xl text-lg leading-8 text-gray-500 dark:text-gray-400">Building future-ready digital solutions</p>
                 </div>
 
                 <Button
                   size="lg"
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3"
+                  className="rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 px-8 py-6 text-base text-white shadow-lg shadow-indigo-600/25 transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-indigo-600/30"
                   onClick={() => {
                     const link = document.createElement("a")
                     link.href = "/Rudraprasad_satapathy_Resume.pdf"
@@ -152,14 +153,15 @@ export default function Portfolio() {
 
               </div>
 
-              <div className="flex justify-center">
-                <div className="relative">
-                  <div className="w-80 h-80 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 p-1">
-                    <div className="w-full h-full rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center">
+              <div className="flex justify-center lg:justify-end">
+                <div className="hero-orb relative">
+                  <div className="absolute -inset-8 -z-10 rounded-full bg-gradient-to-br from-blue-400/35 via-violet-400/20 to-pink-400/35 blur-3xl" />
+                  <div className="h-72 w-72 rounded-[2.5rem] bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-500 p-1 shadow-2xl shadow-indigo-500/30 sm:h-80 sm:w-80">
+                    <div className="flex h-full w-full items-center justify-center rounded-[2.3rem] bg-gray-100 p-2 dark:bg-gray-900">
                       <img
                         src="/profile.png"
                         alt="Rudra Prasad Satapathy"
-                        className="w-72 h-72 rounded-full object-cover"
+                        className="h-full w-full rounded-[2rem] object-cover"
                       />
                     </div>
                   </div>
@@ -170,14 +172,13 @@ export default function Portfolio() {
         </section>
 
         {/* About Section */}
-        <section id="About" className="py-20 bg-gray-50 dark:bg-gray-800">
+        <section id="About" className="py-24">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold mb-4">About Me</h2>
-              <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto"></div>
+              <h2 className="section-heading text-4xl font-extrabold tracking-tight">About Me</h2>
             </div>
 
-            <Card className="shadow-lg">
+            <Card className="soft-card rounded-3xl">
               <CardContent className="p-8">
                 <p className="text-lg leading-relaxed text-gray-600 dark:text-gray-300">
                   🚀 Final-year B.Tech student passionate about backend development, cloud technologies, and building scalable applications using Java and Spring Boot. I’ve developed hands-on experience through academic projects and self-driven learning, working with modern tools and frameworks to build real-world solutions.
@@ -204,15 +205,14 @@ export default function Portfolio() {
         </section>
 
         {/* Skills Section */}
-        <section id="Skills" className="py-20">
+        <section id="Skills" className="py-24">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold mb-4">Skills</h2>
-              <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto"></div>
+              <h2 className="section-heading text-4xl font-extrabold tracking-tight">Skills</h2>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <Card className="soft-card soft-card-hover rounded-2xl">
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <Code className="w-6 h-6 mr-2 text-blue-600" />
@@ -230,7 +230,7 @@ export default function Portfolio() {
                 </CardContent>
               </Card>
 
-              <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <Card className="soft-card soft-card-hover rounded-2xl">
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <Database className="w-6 h-6 mr-2 text-purple-600" />
@@ -248,7 +248,7 @@ export default function Portfolio() {
                 </CardContent>
               </Card>
 
-              <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <Card className="soft-card soft-card-hover rounded-2xl">
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <Globe className="w-6 h-6 mr-2 text-green-600" />
@@ -266,7 +266,7 @@ export default function Portfolio() {
                 </CardContent>
               </Card>
 
-              <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <Card className="soft-card soft-card-hover rounded-2xl">
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <Tool className="w-6 h-6 mr-2 text-orange-600" />
@@ -284,7 +284,7 @@ export default function Portfolio() {
                 </CardContent>
               </Card>
 
-              <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 md:col-span-2 lg:col-span-1">
+              <Card className="soft-card soft-card-hover rounded-2xl md:col-span-2 lg:col-span-1">
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <User className="w-6 h-6 mr-2 text-red-600" />
@@ -306,23 +306,22 @@ export default function Portfolio() {
         </section>
 
         {/* Projects Section */}
-        <section id="Projects" className="py-20 bg-gray-50 dark:bg-gray-800">
+        <section id="Projects" className="border-y border-slate-200/70 bg-white/45 py-24 dark:border-gray-800 dark:bg-gray-900/30">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold mb-4">Projects</h2>
-              <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto"></div>
+              <h2 className="section-heading text-4xl font-extrabold tracking-tight">Projects</h2>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {Projects.map((project, index) => (
                 <Card
                   key={index}
-                  className="shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+                  className="soft-card soft-card-hover group overflow-hidden rounded-2xl"
                 >
-                  <CardHeader className="releative">
+                  <CardHeader className="relative">
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center space-x-3">
-                        <div className="p-3 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500 text-white shadow-md transform transition-transform duration-300 group-hover:scale-110">
+                        <div className="rounded-xl bg-gradient-to-br from-blue-500 to-purple-500 p-3 text-white shadow-lg shadow-indigo-500/25 transition-transform duration-300 group-hover:scale-110">
                           {project.icon}
                         </div>
                         <CardTitle className="text-2xl font-semibold text-gray-800 dark:text-gray-100 tracking-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
@@ -336,7 +335,7 @@ export default function Portfolio() {
                       href={project.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-all duration-300 group"
+                      className="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 transition-all duration-300 hover:text-purple-600 dark:text-blue-400 dark:hover:text-purple-300"
                     >
                       <span>View Project</span>
                      <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -375,21 +374,20 @@ export default function Portfolio() {
         </section>
 
         {/* Resume Section */}
-        <section id="Resume" className="py-20">
+        <section id="Resume" className="py-24">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold mb-4">Resume</h2>
-              <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto"></div>
+              <h2 className="section-heading text-4xl font-extrabold tracking-tight">Resume</h2>
             </div>
 
-            <Card className="shadow-lg mb-8">
+            <Card className="soft-card mb-8 overflow-hidden rounded-3xl">
               <CardContent className="p-8">
-                <div className="bg-white dark:bg-gray-900 p-6 rounded-lg">
+                <div className="rounded-2xl bg-white p-3 shadow-inner dark:bg-gray-900 sm:p-6">
                   <div className="flex justify-center">
                     <img
                       src="/Resume.png" // Change this path based on your project
                       alt="Resume of Rudra Prasad Satapathy"
-                      className="w-full max-w-4xl rounded-lg shadow"
+                      className="w-full max-w-4xl rounded-xl shadow-lg shadow-slate-950/10"
                     />
                   </div>
                 </div>
@@ -399,7 +397,7 @@ export default function Portfolio() {
             <div className="text-center">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3"
+                className="rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 px-8 py-6 text-base text-white shadow-lg shadow-indigo-600/25 transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-indigo-600/30"
                 onClick={() => {
                   const link = document.createElement("a")
                   link.href = "/Rudraprasad_satapathy_Resume.pdf"
@@ -415,7 +413,7 @@ export default function Portfolio() {
         </section>
 
         {/* Contact Section */}
-        <section id="Contact" className="relative overflow-hidden py-24 bg-white dark:bg-gray-950">
+        <section id="Contact" className="relative overflow-hidden border-t border-slate-200/70 py-24 dark:border-gray-800">
           <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-blue-50 to-transparent dark:from-blue-950/30" />
 
           <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -514,7 +512,7 @@ export default function Portfolio() {
         </section>
 
         {/* Footer */}
-        <footer className="py-8 border-t border-gray-200 dark:border-gray-700">
+        <footer className="border-t border-slate-200/70 py-8 dark:border-gray-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center text-gray-600 dark:text-gray-300">
               <p>&copy; 2024 Rudra Prasad Satapathy. All rights reserved.</p>
