@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
   --background: oklch(1 0 0);
@@ -130,6 +130,11 @@
 
 html {
   scroll-behavior: smooth;
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
 }
 
 ::selection {
@@ -137,13 +142,17 @@ html {
 }
 
 .portfolio-shell {
-  background:
+  background-color: var(--background);
+  color: var(--foreground);
+  background-image:
     radial-gradient(circle at 100% 5%, rgba(139, 92, 246, 0.11), transparent 33rem),
     radial-gradient(circle at 0% 42%, rgba(59, 130, 246, 0.08), transparent 29rem);
 }
 
 .dark .portfolio-shell {
-  background:
+  background-color: var(--background);
+  color: var(--foreground);
+  background-image:
     radial-gradient(circle at 100% 5%, rgba(124, 58, 237, 0.18), transparent 33rem),
     radial-gradient(circle at 0% 42%, rgba(37, 99, 235, 0.13), transparent 29rem);
 }

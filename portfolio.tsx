@@ -2,6 +2,7 @@
 
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { useState, useEffect } from "react"
+import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -26,16 +27,15 @@ import {
 import { Text } from "@mantine/core"
 
 export default function Portfolio() {
-  const [darkMode, setDarkMode] = useState(false)
+  const { resolvedTheme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
   const [activeSection, setActiveSection] = useState("Home")
 
   useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add("dark")
-    } else {
-      document.documentElement.classList.remove("dark")
-    }
-  }, [darkMode])
+    setMounted(true)
+  }, [])
+
+  const isDark = mounted && resolvedTheme === "dark"
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
@@ -83,8 +83,8 @@ export default function Portfolio() {
   const [expanded, setExpanded] = useState([false,false,false]);
 
   return (
-    <div className={`min-h-screen transition-colors duration-300 ${darkMode ? "dark" : ""}`}>
-      <div className="portfolio-shell overflow-x-hidden bg-white text-gray-900 dark:bg-gray-950 dark:text-white">
+    <div className="min-h-screen transition-colors duration-300">
+      <div className="portfolio-shell overflow-x-hidden">
         {/* Navigation */}
         <nav className="fixed top-0 z-50 w-full border-b border-white/50 bg-white/70 shadow-sm shadow-slate-950/5 backdrop-blur-xl dark:border-white/5 dark:bg-gray-950/70">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
@@ -108,11 +108,12 @@ export default function Portfolio() {
               </div>
 
               <button
-                onClick={() => setDarkMode(!darkMode)}
-                aria-label="Toggle color theme"
+                onClick={() => setTheme(isDark ? "light" : "dark")}
+                aria-label={`Switch to ${isDark ? "light" : "dark"} theme`}
+                aria-pressed={isDark}
                 className="rounded-full border border-slate-200 bg-white p-2.5 text-slate-700 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-200"
               >
-                {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+                {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
               </button>
             </div>
           </div>
