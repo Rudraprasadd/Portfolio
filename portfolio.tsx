@@ -23,6 +23,9 @@ import {
   User,
   MessageSquare,
   ArrowRight,
+  Menu,
+  X,
+  Phone,
 } from "lucide-react"
 import { Text } from "@mantine/core"
 
@@ -30,9 +33,60 @@ export default function Portfolio() {
   const { resolvedTheme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const [activeSection, setActiveSection] = useState("Home")
+  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
     setMounted(true)
+  }, [])
+
+  useEffect(() => {
+    const revealItems = document.querySelectorAll<HTMLElement>(".reveal")
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible")
+          observer.unobserve(entry.target)
+        }
+      }),
+      { threshold: 0.12 },
+    )
+
+    revealItems.forEach((item) => observer.observe(item))
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)")
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)")
+
+    const setCursorAvailability = () => {
+      const enabled = finePointer.matches && !reducedMotion.matches
+      document.documentElement.classList.toggle("custom-cursor-enabled", enabled)
+      if (!enabled) document.documentElement.classList.remove("custom-cursor-visible")
+    }
+    const moveCursor = (event: MouseEvent) => {
+      document.documentElement.style.setProperty("--cursor-x", `${event.clientX}px`)
+      document.documentElement.style.setProperty("--cursor-y", `${event.clientY}px`)
+      document.documentElement.classList.add("custom-cursor-visible")
+    }
+    const hideCursor = () => document.documentElement.classList.remove("custom-cursor-visible")
+
+    setCursorAvailability()
+    window.addEventListener("mousemove", moveCursor)
+    document.documentElement.addEventListener("mouseleave", hideCursor)
+    window.addEventListener("blur", hideCursor)
+    finePointer.addEventListener("change", setCursorAvailability)
+    reducedMotion.addEventListener("change", setCursorAvailability)
+
+    return () => {
+      window.removeEventListener("mousemove", moveCursor)
+      document.documentElement.removeEventListener("mouseleave", hideCursor)
+      window.removeEventListener("blur", hideCursor)
+      finePointer.removeEventListener("change", setCursorAvailability)
+      reducedMotion.removeEventListener("change", setCursorAvailability)
+      document.documentElement.classList.remove("custom-cursor-enabled")
+      document.documentElement.classList.remove("custom-cursor-visible")
+    }
   }, [])
 
   const isDark = mounted && resolvedTheme === "dark"
@@ -42,56 +96,63 @@ export default function Portfolio() {
     if (element) {
       element.scrollIntoView({ behavior: "smooth" })
       setActiveSection(sectionId)
+      setMenuOpen(false)
     }
   }
 
   const Skills = {
-    languages: ["Java", "SQL", "JavaScript"],
-    frameworksAndLibraries: ["Spring Boot", "Spring MVC", "Spring Security", "Hibernate", "JDBC", "JSP", "JPA", "Thymeleaf", "JUnit", "Mockito"],
-    webDev: ["HTML", "CSS", "Bootstrap", "TailwindCSS", "REST APIs"],
-    tools: ["Git", "GitHub", "VS Code", "Postman", "Docker(Basic)", "Maven", "IntelliJ IDEA", "MySQL"],
-    Concepts: ["OOPs", "Data Structures", "MVC Architecture", "Authentication (JWT/OAuth)", "Unit Testing"],
+    languages: ["Java", "SQL"],
+    frameworksAndLibraries: ["Spring Boot 3", "Spring MVC", "Spring Data JPA", "Spring Security", "REST APIs", "gRPC", "Microservices Architecture"],
+    webDev: ["HTML", "CSS", "Tailwind CSS", "Bootstrap", "Thymeleaf", "React", "JSP"],
+    tools: ["Docker", "Git", "GitHub", "Maven", "Gradle", "Swagger/OpenAPI", "API Gateway", "Postman", "MySQL", "PostgreSQL"],
+    Concepts: ["JWT", "OAuth2", "Keycloak", "Apache Kafka", "JUnit", "Mockito", "Unit Testing", "Integration Testing", "SOLID Principles", "OOP", "Data Structures & Algorithms", "System Design Fundamentals", "Agile/Scrum"],
   }
 
   const Projects = [
     {
       title: "Smart Contact Manager",
       description:
-        "Built a secure and scalable web app to manage personal Contacts with fields like name, email, number, LinkedIn, GitHub, and address. Integrated Google/GitHub OAuth2 login, full Contact CRUD operations, and cloud storage using Cloudinary and role-based access control.",
-      tech: ["Java", "Spring Boot", "Spring Security (JWT/OAuth2)", "Spring Data JPA", "MySQL", "Thymeleaf", "Tailwind CSS", "Cloudinary", "Git", "GitHub", "Postman"],
+        "Built a secure, scalable contact management platform with Google and GitHub OAuth2 login and JWT-based session handling. Implemented CRUD operations backed by Spring Data JPA and MySQL, with server-side validation, structured exception handling, and Cloudinary image storage.",
+      tech: ["Java", "Spring Boot", "Spring Security (JWT/OAuth2)", "Spring Data JPA", "MySQL", "Thymeleaf", "Tailwind CSS", "Cloudinary"],
       icon: <User className="w-6 h-6" />,
       link: "https://github.com/Rudraprasadd/smart-Contact-manager-springboot"
     },
     {
       title: "URL Shortener",
       description:
-        "Built a full-stack web application to shorten long URLs with custom keys, expiration time.Implemented user authentication and role-based access (admin/user) using Spring Security.Admins can manage all URLs, while users can only manage their own URLs.Used MySQL for data storage and Thymeleaf for the frontend.",
-      tech: ["Java", "Spring Boot", "Spring Security", "JPA", "Bootstrap CSS", "Thymeleaf", "MySQL", "Maven", "Bootstrap", "Git", "GitHub", "Postman"],
+        "Built a full-stack URL shortener with custom short-link generation, expiration handling, and role-based access control using Spring Security. Designed the relational schema and JPA entity mappings in MySQL to support link analytics and expiration lifecycle management.",
+      tech: ["Java", "Spring Boot", "Spring Security", "JPA", "Bootstrap CSS", "Thymeleaf", "MySQL", "Maven"],
       icon: <Code className="w-6 h-6" />,
       link: "https://github.com/Rudraprasadd/url_shortener_SpringBoot"
     },
     {
       title: "Patient Management System | Spring Boot Microservices ",
       description:
-        "Designed a microservices-based patient management system featuring JWT authentication, Apache Kafka for async messaging, and gRPC for inter-service communication. Containerized all services with Docker and deployed via an API Gateway; used MySQL and PostgreSQL for persistent storage.",
+        "Architected a microservices-based patient management platform with JWT authentication and role-based access control. Engineered asynchronous Kafka messaging and gRPC inter-service calls, then containerized services with Docker behind a centralized API Gateway using MySQL and PostgreSQL storage.",
       tech: ["Java", "Spring Boot", "REST APIs","Apache Kafka","gRPC", "PostgreSQL", "Docker", "JWT", "API Gateway", "Git", "GitHub"],
       icon: <MessageSquare className="w-6 h-6" />,
       link: "https://github.com/Rudraprasadd/PatientManagement_Microservice",
     },
 
   ]
-  const [expanded, setExpanded] = useState([false,false,false]);
+  const [expanded, setExpanded] = useState<Record<number, boolean>>({});
 
   return (
     <div className="min-h-screen transition-colors duration-300">
-      <div className="portfolio-shell overflow-x-hidden">
+      <div className="portfolio-shell portfolio-grid overflow-x-hidden">
+        <div className="crosshair-cursor" aria-hidden="true">
+          <svg className="cursor-arrow" viewBox="0 0 24 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 2L2.5 23L8.2 17.3L12.5 26L17.1 23.7L12.8 15L21 14.8L2 2Z" />
+          </svg>
+          <span className="crosshair-greeting">Hi</span>
+        </div>
         {/* Navigation */}
         <nav className="fixed top-0 z-50 w-full border-b border-white/50 bg-white/70 shadow-sm shadow-slate-950/5 backdrop-blur-xl dark:border-white/5 dark:bg-gray-950/70">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
             <div className="flex items-center justify-between py-3">
               <div className="brand-gradient text-xl font-extrabold tracking-tight sm:text-2xl">
                 Rudra Prasad Satapathy
-                <p className="mt-0.5 text-xs font-bold uppercase tracking-[0.16em] text-gray-500 dark:text-gray-400">Software Developer</p>
+                <p className="mt-0.5 text-xs font-bold uppercase tracking-[0.16em] text-gray-500 dark:text-gray-400">Java Backend Developer</p>
               </div>
 
               <div className="hidden items-center rounded-full border border-slate-200/70 bg-white/60 px-2 py-1 shadow-sm dark:border-gray-700 dark:bg-gray-900/70 md:flex md:space-x-1">
@@ -115,6 +176,22 @@ export default function Portfolio() {
               >
                 {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
               </button>
+
+              <button
+                onClick={() => setMenuOpen(!menuOpen)}
+                aria-label="Toggle navigation menu"
+                aria-expanded={menuOpen}
+                className="ml-2 rounded-full border border-slate-200 bg-white p-2.5 text-slate-700 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-200 md:hidden"
+              >
+                {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              </button>
+            </div>
+            <div className={`${menuOpen ? "mobile-menu-open" : "mobile-menu-closed"} mobile-menu md:hidden`}>
+              {['Home', 'About', 'Skills', 'Projects', 'Resume', 'Contact'].map((section) => (
+                <button key={section} onClick={() => scrollToSection(section)} className={activeSection === section ? "mobile-nav-active" : ""}>
+                  {section}
+                </button>
+              ))}
             </div>
           </div>
         </nav>
@@ -123,7 +200,7 @@ export default function Portfolio() {
         <section id="Home" className="flex min-h-screen items-center pt-20">
           <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
             <div className="grid items-center gap-14 lg:grid-cols-2">
-              <div className="space-y-8">
+              <div className="reveal space-y-8">
                 <div className="space-y-4">
                   <h1 className="text-5xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
                     Hi, I'm{" "}
@@ -131,16 +208,16 @@ export default function Portfolio() {
                       Rudra Prasad Satapathy
                     </span>
                   </h1>
-                  <p className="brand-gradient text-lg font-semibold">Software Developer</p>
+                  <p className="brand-gradient text-lg font-semibold">Java Backend Developer</p>
                   <p className="text-xl font-medium text-gray-700 dark:text-gray-200 lg:text-2xl">
-                    A passionate Computer Science student
+                    Spring Boot · Microservices · REST APIs
                   </p>
-                  <p className="max-w-xl text-lg leading-8 text-gray-500 dark:text-gray-400">Building future-ready digital solutions</p>
+                  <p className="max-w-xl text-lg leading-8 text-gray-500 dark:text-gray-400">Building secure, scalable backend systems and future-ready digital solutions.</p>
                 </div>
 
                 <Button
                   size="lg"
-                  className="rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 px-8 py-6 text-base text-white shadow-lg shadow-indigo-600/25 transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-indigo-600/30"
+                  className="primary-cta rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 px-8 py-6 text-base text-white shadow-lg shadow-indigo-600/25 transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-indigo-600/30"
                   onClick={() => {
                     const link = document.createElement("a")
                     link.href = "/Rudraprasad_satapathy_Resume.pdf"
@@ -154,7 +231,7 @@ export default function Portfolio() {
 
               </div>
 
-              <div className="flex justify-center lg:justify-end">
+              <div className="reveal reveal-delay flex justify-center lg:justify-end">
                 <div className="hero-orb relative">
                   <div className="absolute -inset-8 -z-10 rounded-full bg-gradient-to-br from-blue-400/35 via-violet-400/20 to-pink-400/35 blur-3xl" />
                   <div className="h-72 w-72 rounded-[2.5rem] bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-500 p-1 shadow-2xl shadow-indigo-500/30 sm:h-80 sm:w-80">
@@ -179,23 +256,23 @@ export default function Portfolio() {
               <h2 className="section-heading text-4xl font-extrabold tracking-tight">About Me</h2>
             </div>
 
-            <Card className="soft-card rounded-3xl">
+            <Card className="soft-card reveal rounded-3xl">
               <CardContent className="p-8">
                 <p className="text-lg leading-relaxed text-gray-600 dark:text-gray-300">
-                  🚀 Final-year B.Tech student passionate about backend development, cloud technologies, and building scalable applications using Java and Spring Boot. I’ve developed hands-on experience through academic projects and self-driven learning, working with modern tools and frameworks to build real-world solutions.
+                  🚀 Java Backend Developer with hands-on experience building secure, scalable applications using Java, Spring Boot, REST APIs, and microservices. I work with JWT/OAuth2 security, Apache Kafka messaging, Docker, and relational databases to turn real-world requirements into reliable backend systems.
                   <br /><br />
-                  I enjoy solving problems and exploring Spring-based ecosystems. I’ve implemented CRUD-based apps using Spring Boot, Hibernate, and JSP, and I’m comfortable with Git-based collaboration.
+                  I enjoy designing clean service architecture, solving backend problems, and writing maintainable code. My projects include a microservices-based patient management platform, a secure contact manager, and a role-based URL shortener.
                   <br /><br />
-                  Currently looking for backend development roles (Java/Spring Boot) where I can grow, contribute, and learn in a collaborative environment — open to internships or full-time opportunities.
+                  I have completed my B.Tech in Computer Science & Engineering and am available to join immediately for Java backend roles where I can contribute, grow, and learn with a collaborative team.
                 </p>
                 <br />
                 <p className="text-lg leading-relaxed text-gray-600 dark:text-gray-300">
                   🧰 Tech Stack: <br />
-                  Languages: Java, SQL, JavaScript <br />
-                  Frameworks & Libraries: Spring Boot, Spring MVC, Spring Security, Hibernate, JDBC, JSP, JPA, Thymeleaf,   Junit, Mockito <br />
-                  Web Technologies: HTML, CSS, Tailwind CSS, REST APIs <br />
-                  Tools: Git, GitHub, Postman, MySQL, Docker (basic), Maven, IntelliJ IDEA, VS Code <br />
-                  Concepts: OOPs, Data Structures, MVC Architecture, Authentication (JWT/OAuth), Unit Testing <br />
+                  Languages: Java, SQL <br />
+                  Backend: Spring Boot 3, Spring MVC, Spring Data JPA, Spring Security, REST APIs, gRPC, Microservices <br />
+                  Security & Messaging: JWT, OAuth2, Keycloak, Apache Kafka <br />
+                  Databases & Tools: MySQL, PostgreSQL, Docker, Git, GitHub, Maven, Gradle, Swagger/OpenAPI, Postman <br />
+                  Practices: JUnit, Mockito, integration testing, SOLID principles, OOP, DSA, system design fundamentals <br />
 
                   📍 Location: India (GMT+5:30) <br />
                   🤝 Let’s connect!
@@ -213,7 +290,7 @@ export default function Portfolio() {
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <Card className="soft-card soft-card-hover rounded-2xl">
+              <Card className="soft-card soft-card-hover reveal rounded-2xl">
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <Code className="w-6 h-6 mr-2 text-blue-600" />
@@ -231,7 +308,7 @@ export default function Portfolio() {
                 </CardContent>
               </Card>
 
-              <Card className="soft-card soft-card-hover rounded-2xl">
+              <Card className="soft-card soft-card-hover reveal rounded-2xl">
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <Database className="w-6 h-6 mr-2 text-purple-600" />
@@ -249,7 +326,7 @@ export default function Portfolio() {
                 </CardContent>
               </Card>
 
-              <Card className="soft-card soft-card-hover rounded-2xl">
+              <Card className="soft-card soft-card-hover reveal rounded-2xl">
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <Globe className="w-6 h-6 mr-2 text-green-600" />
@@ -267,7 +344,7 @@ export default function Portfolio() {
                 </CardContent>
               </Card>
 
-              <Card className="soft-card soft-card-hover rounded-2xl">
+              <Card className="soft-card soft-card-hover reveal rounded-2xl">
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <Tool className="w-6 h-6 mr-2 text-orange-600" />
@@ -285,7 +362,7 @@ export default function Portfolio() {
                 </CardContent>
               </Card>
 
-              <Card className="soft-card soft-card-hover rounded-2xl md:col-span-2 lg:col-span-1">
+              <Card className="soft-card soft-card-hover reveal rounded-2xl md:col-span-2 lg:col-span-1">
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <User className="w-6 h-6 mr-2 text-red-600" />
@@ -317,7 +394,7 @@ export default function Portfolio() {
               {Projects.map((project, index) => (
                 <Card
                   key={index}
-                  className="soft-card soft-card-hover group overflow-hidden rounded-2xl"
+                  className="soft-card soft-card-hover reveal group overflow-hidden rounded-2xl"
                 >
                   <CardHeader className="relative">
                     <div className="flex items-center justify-between mb-3">
@@ -351,7 +428,7 @@ export default function Portfolio() {
                       </Text>
 
                       <button
-                        onClick={() => setExpanded({...expanded, [index]: !expanded[index]})}
+                        onClick={() => setExpanded({ ...expanded, [index]: !expanded[index] })}
                         className="hover:underline text-blue-600 cursor-pointer mt-1"
                       >
                         {expanded[index] ? "View less" : "View more"}
@@ -381,7 +458,7 @@ export default function Portfolio() {
               <h2 className="section-heading text-4xl font-extrabold tracking-tight">Resume</h2>
             </div>
 
-            <Card className="soft-card mb-8 overflow-hidden rounded-3xl">
+            <Card className="soft-card reveal mb-8 overflow-hidden rounded-3xl">
               <CardContent className="p-8">
                 <div className="rounded-2xl bg-white p-3 shadow-inner dark:bg-gray-900 sm:p-6">
                   <div className="flex justify-center">
@@ -398,7 +475,7 @@ export default function Portfolio() {
             <div className="text-center">
               <Button
                 size="lg"
-                className="rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 px-8 py-6 text-base text-white shadow-lg shadow-indigo-600/25 transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-indigo-600/30"
+                className="primary-cta rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 px-8 py-6 text-base text-white shadow-lg shadow-indigo-600/25 transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-indigo-600/30"
                 onClick={() => {
                   const link = document.createElement("a")
                   link.href = "/Rudraprasad_satapathy_Resume.pdf"
@@ -431,11 +508,11 @@ export default function Portfolio() {
             </div>
 
             {/* Stretched grid keeps both Contact columns the same height on desktop and stacks them on mobile. */}
-            <div className="grid grid-cols-1 items-stretch gap-6 md:grid-cols-2">
+            <div className="reveal grid grid-cols-1 items-stretch gap-6 md:grid-cols-2">
               {/* Full-height flex column distributes the Contact cards evenly against the form card. */}
               <div className="flex h-full min-h-[500px] flex-col justify-between gap-4">
                 <a
-                  href="mailto:rudraprasadsatapathy3506@gmail.com"
+                  href="mailto:rudraprasadsatapathy21@gmail.com"
                   className="group flex items-start rounded-2xl border border-gray-200 bg-gray-50 p-6 transition hover:-translate-y-1 hover:border-blue-200 hover:bg-white hover:shadow-xl hover:shadow-blue-950/5 dark:border-gray-800 dark:bg-gray-900/60 dark:hover:border-blue-900 dark:hover:bg-gray-900"
                 >
                   <span className="mr-4 inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-white shadow-lg shadow-blue-600/20">
@@ -444,7 +521,22 @@ export default function Portfolio() {
                   <span>
                     <span className="block font-semibold text-gray-950 dark:text-white">Email</span>
                     <span className="mt-1 block break-all text-sm text-gray-600 transition group-hover:text-blue-600 dark:text-gray-300 dark:group-hover:text-blue-300">
-                      rudraprasadsatapathy3506@gmail.com
+                      rudraprasadsatapathy21@gmail.com
+                    </span>
+                  </span>
+                </a>
+
+                <a
+                  href="tel:+917008348676"
+                  className="group flex items-start rounded-2xl border border-gray-200 bg-gray-50 p-6 transition hover:-translate-y-1 hover:border-blue-200 hover:bg-white hover:shadow-xl hover:shadow-blue-950/5 dark:border-gray-800 dark:bg-gray-900/60 dark:hover:border-blue-900 dark:hover:bg-gray-900"
+                >
+                  <span className="mr-4 inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-violet-600 text-white shadow-lg shadow-violet-600/20">
+                    <Phone className="h-5 w-5" />
+                  </span>
+                  <span>
+                    <span className="block font-semibold text-gray-950 dark:text-white">Phone</span>
+                    <span className="mt-1 block text-sm text-gray-600 transition group-hover:text-blue-600 dark:text-gray-300 dark:group-hover:text-blue-300">
+                      +91 70083 48676
                     </span>
                   </span>
                 </a>
