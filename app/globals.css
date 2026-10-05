@@ -381,7 +381,7 @@ html.dark {
 .dark .mobile-menu button { color: rgb(203 213 225); }
 .dark .mobile-menu button:hover, .dark .mobile-menu .mobile-nav-active { background: rgba(30, 58, 138, 0.32); color: rgb(147 197 253); }
 .mobile-menu-closed { max-height: 0; opacity: 0; }
-.mobile-menu-open { max-height: 16rem; padding: 0 0 0.75rem; opacity: 1; }
+.mobile-menu-open { max-height: 24rem; padding: 0 0 0.75rem; opacity: 1; }
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }

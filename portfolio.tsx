@@ -26,6 +26,9 @@ import {
   Menu,
   X,
   Phone,
+  BriefcaseBusiness,
+  GraduationCap,
+  Award,
 } from "lucide-react"
 import { Text } from "@mantine/core"
 
@@ -102,13 +105,21 @@ export default function Portfolio() {
 
   const Skills = {
     languages: ["Java", "SQL"],
-    frameworksAndLibraries: ["Spring Boot 3", "Spring MVC", "Spring Data JPA", "Spring Security", "REST APIs", "gRPC", "Microservices Architecture"],
-    webDev: ["HTML", "CSS", "Tailwind CSS", "Bootstrap", "Thymeleaf", "React", "JSP"],
-    tools: ["Docker", "Git", "GitHub", "Maven", "Gradle", "Swagger/OpenAPI", "API Gateway", "Postman", "MySQL", "PostgreSQL"],
-    Concepts: ["JWT", "OAuth2", "Keycloak", "Apache Kafka", "JUnit", "Mockito", "Unit Testing", "Integration Testing", "SOLID Principles", "OOP", "Data Structures & Algorithms", "System Design Fundamentals", "Agile/Scrum"],
+    frameworksAndLibraries: ["Spring Boot 3", "Spring MVC", "Spring Data JPA", "Spring Security", "Spring AI", "REST APIs", "gRPC", "Microservices Architecture", "API Gateway"],
+    webDev: ["React", "Next.js", "TypeScript", "HTML", "CSS", "Tailwind CSS", "Bootstrap", "Thymeleaf", "JSP"],
+    tools: ["Docker", "Git", "GitHub", "Maven", "Gradle", "Swagger/OpenAPI", "Cloudinary", "MySQL", "PostgreSQL", "pgvector"],
+    Concepts: ["JWT", "OAuth2", "Keycloak", "Role-Based Access Control", "Apache Kafka", "Server-Sent Events", "RAG", "OpenAI API", "Vector Embeddings", "Semantic Search", "JUnit", "Mockito", "Unit Testing", "SOLID Principles", "OOP", "Collections", "JDBC", "Agile/Scrum", "CI/CD Fundamentals"],
   }
 
   const Projects = [
+    {
+      title: "DevPilot | AI-Powered GitHub Codebase Assistant (RAG)",
+      description:
+        "Built a full-stack Retrieval-Augmented Generation assistant that answers questions about GitHub repositories with source-file citations. Developed an asynchronous indexing pipeline using the GitHub REST API, chunking, OpenAI embeddings, PostgreSQL pgvector, and Spring AI for repository-scoped semantic search. Streamed responses to a Next.js UI with Server-Sent Events and secured the app using GitHub OAuth2, Spring Security, ownership validation, and encrypted token storage.",
+      tech: ["Java 21", "Spring Boot", "Spring AI", "OpenAI API", "PostgreSQL", "pgvector", "GitHub OAuth2", "Next.js", "React", "TypeScript", "Docker", "SSE"],
+      icon: <Code className="w-6 h-6" />,
+      link: "https://github.com/Rudraprasadd/DevCode",
+    },
     {
       title: "Smart Contact Manager",
       description:
@@ -118,14 +129,6 @@ export default function Portfolio() {
       link: "https://github.com/Rudraprasadd/smart-Contact-manager-springboot"
     },
     {
-      title: "URL Shortener",
-      description:
-        "Built a full-stack URL shortener with custom short-link generation, expiration handling, and role-based access control using Spring Security. Designed the relational schema and JPA entity mappings in MySQL to support link analytics and expiration lifecycle management.",
-      tech: ["Java", "Spring Boot", "Spring Security", "JPA", "Bootstrap CSS", "Thymeleaf", "MySQL", "Maven"],
-      icon: <Code className="w-6 h-6" />,
-      link: "https://github.com/Rudraprasadd/url_shortener_SpringBoot"
-    },
-    {
       title: "Patient Management System | Spring Boot Microservices ",
       description:
         "Architected a microservices-based patient management platform with JWT authentication and role-based access control. Engineered asynchronous Kafka messaging and gRPC inter-service calls, then containerized services with Docker behind a centralized API Gateway using MySQL and PostgreSQL storage.",
@@ -133,7 +136,37 @@ export default function Portfolio() {
       icon: <MessageSquare className="w-6 h-6" />,
       link: "https://github.com/Rudraprasadd/PatientManagement_Microservice",
     },
-
+    {
+      title: "URL Shortener",
+      description:
+        "Built a full-stack URL shortener with custom short-link generation, expiration handling, and role-based access control using Spring Security. Designed the relational schema and JPA entity mappings in MySQL to support link analytics and expiration lifecycle management.",
+      tech: ["Java", "Spring Boot", "Spring Security", "JPA", "Bootstrap CSS", "Thymeleaf", "MySQL", "Maven"],
+      icon: <Code className="w-6 h-6" />,
+      link: "https://github.com/Rudraprasadd/url_shortener_SpringBoot",
+    },
+  ]
+  const experience = [
+    {
+      role: "Junior GenAI Intern",
+      company: "Qualitas Global, Pune",
+      period: "Dec 2025 – Mar 2026",
+      workMode: "On-site",
+      highlights: [
+        "Completed the Junior GenAI Internship Program with hands-on exposure to Generative AI and LLM concepts through AI/ML pipelines.",
+        "Independently built DevPilot, a RAG-based AI coding assistant using Java, Spring Boot, Spring AI, OpenAI API, pgvector, and Next.js/React.",
+        "Supported AI/ML data annotation and QA workflows, annotating and validating 500+ image and text data points daily.",
+      ],
+    },
+    {
+      role: "Java Intern",
+      company: "Sentientware Tech Solutions, Berhampur",
+      period: "Jun 2025 – Jul 2025",
+      workMode: "Hybrid",
+      highlights: [
+        "Completed a 30-day intensive Core Java internship focused on OOP, JDBC, Collections, and exception handling.",
+        "Delivered working modules under mentorship, translating requirements into tested, maintainable Java code.",
+      ],
+    },
   ]
   const [expanded, setExpanded] = useState<Record<number, boolean>>({});
 
@@ -156,7 +189,7 @@ export default function Portfolio() {
               </div>
 
               <div className="hidden items-center rounded-full border border-slate-200/70 bg-white/60 px-2 py-1 shadow-sm dark:border-gray-700 dark:bg-gray-900/70 md:flex md:space-x-1">
-                {["Home", "About", "Skills", "Projects", "Resume", "Contact"].map((section) => (
+                {["Home", "About", "Skills", "Projects", "Experience", "Resume", "Contact"].map((section) => (
                   <button
                     key={section}
                     onClick={() => scrollToSection(section)}
@@ -187,7 +220,7 @@ export default function Portfolio() {
               </button>
             </div>
             <div className={`${menuOpen ? "mobile-menu-open" : "mobile-menu-closed"} mobile-menu md:hidden`}>
-              {['Home', 'About', 'Skills', 'Projects', 'Resume', 'Contact'].map((section) => (
+                {['Home', 'About', 'Skills', 'Projects', 'Experience', 'Resume', 'Contact'].map((section) => (
                 <button key={section} onClick={() => scrollToSection(section)} className={activeSection === section ? "mobile-nav-active" : ""}>
                   {section}
                 </button>
@@ -259,22 +292,22 @@ export default function Portfolio() {
             <Card className="soft-card reveal rounded-3xl">
               <CardContent className="p-8">
                 <p className="text-lg leading-relaxed text-gray-600 dark:text-gray-300">
-                  🚀 Java Backend Developer with hands-on experience building secure, scalable applications using Java, Spring Boot, REST APIs, and microservices. I work with JWT/OAuth2 security, Apache Kafka messaging, Docker, and relational databases to turn real-world requirements into reliable backend systems.
+                  🚀 Java Backend Developer with hands-on experience designing REST APIs and Spring Boot microservices, including JWT/OAuth2 authentication, Apache Kafka messaging, and gRPC inter-service communication. I build secure, scalable backend systems using Docker, MySQL, PostgreSQL, JUnit, and Mockito.
                   <br /><br />
-                  I enjoy designing clean service architecture, solving backend problems, and writing maintainable code. My projects include a microservices-based patient management platform, a secure contact manager, and a role-based URL shortener.
+                  I also build Generative AI applications using RAG, Spring AI, OpenAI APIs, vector embeddings, and semantic search. My work includes DevPilot, a RAG-powered GitHub codebase assistant, as well as a microservices-based patient-management platform and secure Spring Boot web applications.
                   <br /><br />
-                  I have completed my B.Tech in Computer Science & Engineering and am available to join immediately for Java backend roles where I can contribute, grow, and learn with a collaborative team.
+                  An Oracle SQL Certified Associate and Wipro Java Full Stack certified developer, I am pursuing a B.Tech in Computer Science & Engineering at GIET University and am available to join immediately for full-time software development roles.
                 </p>
                 <br />
                 <p className="text-lg leading-relaxed text-gray-600 dark:text-gray-300">
                   🧰 Tech Stack: <br />
                   Languages: Java, SQL <br />
-                  Backend: Spring Boot 3, Spring MVC, Spring Data JPA, Spring Security, REST APIs, gRPC, Microservices <br />
-                  Security & Messaging: JWT, OAuth2, Keycloak, Apache Kafka <br />
-                  Databases & Tools: MySQL, PostgreSQL, Docker, Git, GitHub, Maven, Gradle, Swagger/OpenAPI, Postman <br />
-                  Practices: JUnit, Mockito, integration testing, SOLID principles, OOP, DSA, system design fundamentals <br />
+                  Backend: Spring Boot 3, Spring MVC, Spring Data JPA, Spring Security, Spring AI, REST APIs, gRPC, Microservices <br />
+                  AI, Security & Messaging: RAG, OpenAI API, vector embeddings, semantic search, JWT, OAuth2, Keycloak, Apache Kafka, SSE <br />
+                  Databases & Tools: MySQL, PostgreSQL, pgvector, Docker, Git, GitHub, Maven, Gradle, Swagger/OpenAPI, Cloudinary <br />
+                  Practices: JUnit, Mockito, unit testing, SOLID principles, OOP, Collections, JDBC, Agile/Scrum <br />
 
-                  📍 Location: India (GMT+5:30) <br />
+                  📍 Location: Berhampur, India (GMT+5:30) <br />
                   🤝 Let’s connect!
                 </p>
               </CardContent>
@@ -289,7 +322,7 @@ export default function Portfolio() {
               <h2 className="section-heading text-4xl font-extrabold tracking-tight">Skills</h2>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               <Card className="soft-card soft-card-hover reveal rounded-2xl">
                 <CardHeader>
                   <CardTitle className="flex items-center">
@@ -390,7 +423,7 @@ export default function Portfolio() {
               <h2 className="section-heading text-4xl font-extrabold tracking-tight">Projects</h2>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2">
               {Projects.map((project, index) => (
                 <Card
                   key={index}
@@ -398,11 +431,11 @@ export default function Portfolio() {
                 >
                   <CardHeader className="relative">
                     <div className="flex items-center justify-between mb-3">
-                      <div className="flex items-center space-x-3">
+                      <div className="flex min-w-0 items-center space-x-3">
                         <div className="rounded-xl bg-gradient-to-br from-blue-500 to-purple-500 p-3 text-white shadow-lg shadow-indigo-500/25 transition-transform duration-300 group-hover:scale-110">
                           {project.icon}
                         </div>
-                        <CardTitle className="text-2xl font-semibold text-gray-800 dark:text-gray-100 tracking-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
+                        <CardTitle className="min-w-0 text-2xl font-semibold tracking-tight text-gray-800 transition-colors duration-300 group-hover:text-blue-600 dark:text-gray-100 dark:group-hover:text-blue-400">
                           <Text lineClamp={2}>{project.title}</Text>
 
                         </CardTitle>
@@ -448,6 +481,77 @@ export default function Portfolio() {
                 </Card>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* Experience Section */}
+        <section id="Experience" className="border-y border-slate-200/70 bg-white/45 py-24 dark:border-gray-800 dark:bg-gray-900/30">
+          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-16 text-center">
+              <h2 className="section-heading text-4xl font-extrabold tracking-tight">Experience</h2>
+            </div>
+
+            <div className="space-y-6">
+              {experience.map((item) => (
+                <Card key={`${item.role}-${item.company}`} className="soft-card reveal rounded-3xl">
+                  <CardContent className="p-7 sm:p-8">
+                    <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                      <div className="flex gap-4">
+                        <div className="mt-0.5 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500 p-3 text-white shadow-lg shadow-indigo-500/25">
+                          <BriefcaseBusiness className="h-6 w-6" />
+                        </div>
+                        <div>
+                          <h3 className="text-xl font-bold text-gray-900 dark:text-white">{item.role}</h3>
+                          <p className="mt-1 font-medium text-blue-700 dark:text-blue-300">{item.company}</p>
+                        </div>
+                      </div>
+                      <div className="flex flex-wrap gap-2 sm:justify-end">
+                        <Badge variant="outline" className="w-fit whitespace-nowrap">{item.period}</Badge>
+                        <Badge variant="secondary" className="w-fit whitespace-nowrap">{item.workMode}</Badge>
+                      </div>
+                    </div>
+                    <ul className="mt-6 space-y-3 pl-5 text-gray-600 marker:text-blue-600 dark:text-gray-300">
+                      {item.highlights.map((highlight) => <li key={highlight} className="pl-1 leading-relaxed">{highlight}</li>)}
+                    </ul>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Education & Certifications Section */}
+        <section className="py-24">
+          <div className="mx-auto grid max-w-6xl gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
+            <Card className="soft-card reveal rounded-3xl">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-3 text-2xl">
+                  <GraduationCap className="h-7 w-7 text-blue-600" />
+                  Education
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <h3 className="text-lg font-bold text-gray-900 dark:text-white">Bachelor of Technology in Computer Science & Engineering</h3>
+                <p className="mt-2 text-gray-600 dark:text-gray-300">GIET University, Gunupur</p>
+                <Badge variant="outline" className="mt-4">Aug 2022 – Jun 2026</Badge>
+              </CardContent>
+            </Card>
+            <Card className="soft-card reveal rounded-3xl">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-3 text-2xl">
+                  <Award className="h-7 w-7 text-purple-600" />
+                  Certifications & Awards
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-3 pl-5 text-gray-600 marker:text-purple-600 dark:text-gray-300">
+                  <li>Oracle Database SQL Certified Associate — Oracle</li>
+                  <li>TalentNext Java Full Stack — Wipro</li>
+                  <li>Master Spring Boot 3 & Spring Framework 6 with Java — Udemy</li>
+                  <li>Java Training — Spoken Tutorial, IIT Bombay</li>
+                </ul>
+              </CardContent>
+            </Card>
           </div>
         </section>
 
@@ -582,7 +686,7 @@ export default function Portfolio() {
                   <span>
                     <span className="block font-semibold text-gray-950 dark:text-white">Location</span>
                     <span className="mt-1 block text-sm text-gray-600 dark:text-gray-300">
-                      India, available for remote collaboration
+                      Berhampur, India — available for remote collaboration
                     </span>
                   </span>
                 </div>
@@ -608,7 +712,7 @@ export default function Portfolio() {
         <footer className="border-t border-slate-200/70 py-8 dark:border-gray-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center text-gray-600 dark:text-gray-300">
-              <p>&copy; 2024 Rudra Prasad Satapathy. All rights reserved.</p>
+              <p>&copy; 2026 Rudra Prasad Satapathy. All rights reserved.</p>
               <p className="mt-2 text-sm">Developed by Rudra Prasad Satapathy</p>
             </div>
           </div>
