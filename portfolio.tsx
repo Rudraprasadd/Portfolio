@@ -663,7 +663,7 @@ export default function Portfolio() {
                 </a>
 
                 <a
-                  href="https://www.linkedin.com/in/rudraprasad-satapathy"
+                  href="https://www.linkedin.com/in/rudraprasad-s/"
                   target="_blank"
                   rel="noreferrer"
                   className="group flex items-start rounded-2xl border border-gray-200 bg-gray-50 p-6 transition hover:-translate-y-1 hover:border-blue-200 hover:bg-white hover:shadow-xl hover:shadow-blue-950/5 dark:border-gray-800 dark:bg-gray-900/60 dark:hover:border-blue-900 dark:hover:bg-gray-900"
